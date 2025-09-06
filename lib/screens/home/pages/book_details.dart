@@ -99,6 +99,15 @@ class BookDetails extends StatelessWidget {
       );
     }
 
+    Widget saveButton() {
+      return Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(color: greenColor, shape: BoxShape.circle),
+        child: Image.asset('assets/icons/save_icon.png', width: 16, height: 20),
+      );
+    }
+
     Widget buttonReadNow() {
       return Container(
         height: 50,
@@ -183,6 +192,7 @@ class BookDetails extends StatelessWidget {
           Stack(
             children: [
               Column(children: [header(), bookImage(), description()]),
+              saveButton(),
             ],
           ),
         ],
