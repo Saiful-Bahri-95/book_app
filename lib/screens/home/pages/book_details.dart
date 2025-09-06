@@ -7,6 +7,8 @@ class BookDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map data = ModalRoute.of(context)?.settings.arguments as Map;
+
     Widget header() {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
@@ -34,14 +36,17 @@ class BookDetails extends StatelessWidget {
     }
 
     Widget bookImage() {
-      return Container(
-        height: 267,
-        width: 175,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/trending_book_1.png'),
+      return Hero(
+        tag: data['imageUrl'],
+        child: Container(
+          height: 267,
+          width: 175,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage(data['imageUrl']),
+            ),
           ),
         ),
       );
@@ -100,11 +105,16 @@ class BookDetails extends StatelessWidget {
     }
 
     Widget saveButton() {
-      return Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(color: greenColor, shape: BoxShape.circle),
-        child: Image.asset('assets/icons/save_icon.png', width: 16, height: 20),
+      return Positioned(
+        top: 400,
+        right: 30,
+        child: Container(
+          height: 50,
+          width: 50,
+          padding: EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(color: greenColor, shape: BoxShape.circle),
+          child: Image.asset('assets/icons/icon-save.png'),
+        ),
       );
     }
 
@@ -147,12 +157,12 @@ class BookDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Enchantment',
+                        data['title'],
                         style: semiBoldText20.copyWith(color: blackColor2),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        'Guy Kawasaki',
+                        data['writers'],
                         style: mediumText14.copyWith(color: greyColor),
                       ),
                     ],
